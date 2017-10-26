@@ -1,0 +1,19 @@
+<view class="msite">
+  <view class="search">
+    <input type="text" placeholder="收货地址（写字楼，小区，街道或者学校）" class="input-search" focus confirm-type="search" bindinput="search"/>
+  </view>
+  <view class="panel">
+    <view class="title">当前地址</view>
+    <view class="address">
+      <text>{{currentAddress.address}}</text>
+      <text bindtap="getAddress">重新定位</text>
+    </view>
+  </view>
+  <view class="panel" wx:if="{{list.length>0}}">
+    <view class="title">搜索地址</view>
+    <view class="search-address" wx:for="{{list}}" wx:key="{{index}}" data-address="{{item}}" bindtap="setAddress">
+      <view class="name">{{item.name}}</view>
+      <view class="detail">{{item.address}}</view>
+    </view>
+  </view>
+</view>

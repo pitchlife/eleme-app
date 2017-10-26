@@ -1,0 +1,99 @@
+<import src="/template/loading/loading.wxml" />
+<import src="/template/shop-item/shop-item.wxml" />
+<scroll-view class="search" scroll-y bindscrolltolower="loadmore" lower-threshold="0">
+  <view class='search-wrapper'>
+    <input type="text" placeholder="搜索商家、商品" class="input-search" focus confirm-type="search" bindinput="bindKeyInput" value="{{keyword}}" />
+  </view>
+
+  <view class='results' wx:if="{{results}}">
+    <view class='filter-bar ui-border-b'>
+      <view class='item' catchtap="toggleCate">分类</view>
+      <view class='item' bindtap="toggleOrderby">排序</view>
+      <view class='item' bindtap="toggleFilter">筛选</view>
+      <view class='box ui-border-b' hidden='{{!cateFlag}}'>
+        <scroll-view scroll-y class='half'>
+          <view class='cate-item {{cateIndex==index?"current":""}}' wx:for="{{cateList}}" wx:key="{{index}}" data-index='{{index}}' data-subcategories='{{item.sub_categories}}' data-ids='{{item.ids}}' bindtap="selectCate">
+            <text class='name'>{{item.name}}</text>
+            <text class='badge'>{{item.count}}</text>
+          </view>
+        </scroll-view>
+        <scroll-view scroll-y class='half' wx:if="{{subCate.length>0}}">
+          <view class='cate-item' wx:for="{{subCate}}" wx:key="{{index}}" data-index='{{index}}' data-subcatename='{{item.name}}' bindtap="selectSubCate">
+            <view class='name'>
+              <image src='{{item.image_url}}' class='cate-icon'></image>{{item.name}}</view>
+            <text class='badge'>{{item.count}}</text>
+          </view>
+        </scroll-view>
+      </view>
+      <view class='box filter-box ui-border-b' wx:if='{{filterFlag}}'>
+        <view class="back-layer" wx:if="{{filterFlag}}" catchtap="toggleFilter"></view>
+        <view class='content'>
+          <view class='title'>配送方式</view>
+          <radio-group class="radio-group" id="deliveryList" bindchange="costRadioChange">
+            <view class="radio-item" wx:for="{{deliveryList}}" wx:key="{{index}}">
+              <radio id="{{item.title}}" value="{{item.id}}" class="radio" />
+              <label class="value {{item.checked?'checked':''}}" for="{{item.title}}">
+                <image src="/static/images/check.png" style='width:40rpx;height:40rpx;' wx:if="{{item.checked}}"></image>
+                <text>{{item.title}}</text>
+              </label>
+            </view>
+          </radio-group>
+          <view class='title'>人均消费</view>
+          <radio-group class="radio-group" id="costList" bindchange="costRadioChange">
+            <view class="radio-item" wx:for="{{costList}}" wx:key="{{index}}">
+              <radio id="{{item.title}}" value="{{item.id}}" class="radio" />
+              <label class="value {{item.checked?'checked':''}}" for="{{item.title}}">
+                <image src="/static/images/check.png" style='width:40rpx;height:40rpx;' wx:if="{{item.checked}}"></image>
+                <text>{{item.title}}</text>
+              </label>
+            </view>
+          </radio-group>
+          <view class='title'>优惠活动</view>
+          <radio-group class="radio-group" id="activityList" bindchange="costRadioChange">
+            <view class="radio-item" wx:for="{{activityList}}" wx:key="{{index}}">
+              <radio id="{{item.title}}" value="{{item.id}}" class="radio" />
+              <label class="value {{item.checked?'checked':''}}" for="{{item.title}}">
+                <image src="/static/images/check.png" style='width:40rpx;height:40rpx;' wx:if="{{item.checked}}"></image>
+                <text>{{item.title}}</text>
+              </label>
+            </view>
+          </radio-group>
+
+        </view>
+        <view class='btn-wrapper'>
+          <button class='filter-btn'>清空</button>
+          <button class='filter-btn filter-btn-sure'>确定</button>
+        </view>
+      </view>
+    </view>
+    <block wx:for="{{results.restaurant_with_foods}}" wx:key="{{index}}">
+      <navigator class='nav' hover-class="navigator-hover" url='/pages/shop/shop?id={{item.restaurant.id}}'>
+        <template is="searchItem" data="{{...item}}" />
+      </navigator>
+    </block>
+  </view>
+
+  <block wx:else>
+    <view class='panel' wx:if="{{searchHistory.length>0}}">
+      <view class='panel-header'>
+        <text>搜索历史</text>
+        <icon type="clear" size="20" color="#ddd" bindtap='clearHis' />
+      </view>
+      <view class='panel-body'>
+        <text class='word ui-border-radius' wx:for="{{searchHistory}}" wx:key="{{index}}" data-keyword="{{item}}" bindtap="wordtap">{{item}}</text>
+      </view>
+    </view>
+
+    <view class='panel'>
+      <view class='panel-header'>
+        <text>热门搜索</text>
+      </view>
+      <view class='panel-body' wx:if="{{HotWords.length>0}}">
+        <text class='word ui-border-radius' wx:for="{{HotWords}}" wx:key="{{index}}" data-keyword="{{item.word}}" bindtap="wordtap">{{item.word}}</text>
+      </view>
+      <view class='loading-wrapper' wx:else>
+        <template is="loading" />
+      </view>
+    </view>
+  </block>
+</scroll-view>

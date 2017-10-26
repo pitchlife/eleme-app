@@ -1,0 +1,3 @@
+<template name="eLabel">
+  <text class="label" style='background:#{{item.delivery_mode.color}}'>{{item.delivery_mode.text}}</text>
+</template>

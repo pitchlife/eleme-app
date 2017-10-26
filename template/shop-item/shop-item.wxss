@@ -1,0 +1,69 @@
+@import "/template/label/label.wxss";
+@import "/template/star-rating/star-rating.wxss";
+
+.shop-item {
+  position: relative;
+  display: flex;
+  margin: 0 30rpx 0 30rpx;
+  padding-top: 20rpx;
+}
+
+.shop-item .avatar {
+  width: 130rpx;
+  height: 130rpx;
+  border-radius: 3px;
+}
+
+.shop-item .content {
+  flex: 1;
+  padding-left: 30rpx;
+  overflow: hidden;
+}
+
+.shop-item .shop-name {
+  font-weight: 600;
+  font-size: 30rpx;
+}
+
+.shop-item .rating {
+  display: flex;
+  justify-content: space-between;
+  color: #666;
+  margin: 0 0 14rpx;
+}
+
+.shop-item .rating .left {
+  font-size: 24rpx;
+}
+
+.shop-item .delivery {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 10rpx;
+  color: #ddd;
+}
+
+.shop-item .delivery text {
+  color: #666;
+  font-size: 24rpx;
+}
+
+.shop-item .activities {
+  margin: 10rpx 0 10rpx;
+}
+
+.shop-item .activities .description {
+  line-height: 42rpx;
+  font-size: 22rpx;
+  color: #666;
+}
+
+.shop-item .delivery .distance {
+  font-size: 20rpx;
+}
+
+.shop-item .delivery .lead-time {
+  color: #0085ff;
+  font-size: 20rpx;
+}

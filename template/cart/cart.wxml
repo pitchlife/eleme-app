@@ -1,0 +1,35 @@
+<import src="/template/control/control.wxml" />
+<template name="cart">
+  <view class="cart" bindtap='toggleCartFoods'>
+    <view class="left">
+      <view class="icon-wrapper {{selectedFoods.length>0?'highlight':''}}">
+        <view class="badge" wx:if="{{totalCount>0}}">{{totalCount}}</view>
+        <image src="/static/images/cart.svg" class="icon"></image>
+      </view>
+    </view>
+    <view class="center">
+      <view class="price">￥{{totalPrice}}</view>
+      <view class="desc">另需配送费￥{{float_delivery_fee}}元</view>
+    </view>
+    <view class="right {{totalPrice >= float_minimum_order_amount?'enough':''}}">
+      {{payDesc}}
+    </view>
+    <view class='foods' wx:if="{{selectedFoods.length>0}}">
+      <view class='title'>
+        <text>购物车</text>
+        <text>清空</text>
+      </view>
+      <view class='list'>
+        <view class='item ui-border-b' wx:for="{{selectedFoods}}" wx:key="{{index}}">
+          <view class='name'>{{item.name}}
+            <text wx:if="item.specs.length>0" wx:for="{{item.specs}}" wx:for-item="spec" wx:for-index="i" wx:key="{{i}}">({{spec.value}})</text>
+          </view>
+          <view class='price'>￥{{item.count*item.price}}</view>
+          <view class="btn-control">
+            <template is="control" data="{{...item,index}}" />
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</template>

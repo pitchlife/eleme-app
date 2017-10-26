@@ -1,0 +1,170 @@
+@import "/template/shop-item/shop-item.wxss";
+@import "/template/isLoading/isLoading.wxss";
+
+.img-wrapper {
+  animation: shellPulse 1s linear infinite;
+}
+
+.img-wrapper .img-placeholder {
+  width: 750rpx;
+}
+
+.toTop {
+  position: fixed;
+  right: 30rpx;
+  bottom: 30rpx;
+  width: 50rpx;
+  height: 50rpx;
+  padding: 10rpx;
+  border: 2px solid #8a8a8a;
+  border-radius: 50%;
+  opacity: 0.8;
+  animation: fadeToTop 0.3s;
+}
+
+.block-placeholder {
+  background-color: #0085ff;
+  height: 270rpx;
+}
+
+.place {
+  background: #f3f5f9;
+}
+
+.place .place-header {
+  background-color: #0085ff;
+  padding: 0 30rpx;
+}
+
+.place .place-header .address {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: -20rpx;
+  height: 100rpx;
+}
+
+.place .place-header .address .address-detail {
+  color: #fff;
+  font-size: 36rpx;
+  font-weight: 600;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.place .place-header .address .address-detail .icon-location_fill {
+  color: #fff;
+}
+
+.place .place-header .address .address-detail .change-place {
+  font-size: 12px;
+  font-weight: normal;
+  margin-left: 4px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.place .place-header .address .weather {
+  display: inline-flex;
+  align-items: center;
+  margin: 0 8px;
+  color: #fff;
+  font-size: 22rpx;
+}
+
+.place .place-header .address .weather .desc {
+  font-size: 22rpx;
+}
+
+.place .place-header .address .weather .desc .temperature {
+  font-size: 28rpx;
+}
+
+.place .place-header .address .weather image {
+  display: inline-block;
+  width: 76rpx;
+  height: 76rpx;
+}
+
+.place .place-header .search-wrapper {
+  padding: 10px 0;
+}
+
+.place .place-header .search-wrapper .search {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 70rpx;
+  background: #fff;
+  border-radius: 34rpx;
+  font-size: 14px;
+  color: #666;
+}
+
+.scroll-view_H {
+  display: flex;
+  padding-bottom: 20rpx;
+  color: #fff;
+  white-space: nowrap;
+}
+
+.scroll-view_H .word {
+  display: inline-block;
+  padding: 0 12rpx;
+  font-size: 24rpx;
+}
+
+.entries {
+  background: #fff;
+  margin-bottom: 20rpx;
+}
+
+.swiper {
+  width: 100%;
+}
+
+.swiper-item {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.entries .item {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 130rpx;
+  width: 25%;
+}
+
+.entries .item .icon {
+  width: 80rpx;
+  height: 80rpx;
+}
+
+.entries .item .name {
+  font-size: 24rpx;
+}
+
+
+.shops {
+  background: #fff;
+}
+
+.shops .nav {
+  _padding-top: 20rpx;
+}
+
+.shops .title {
+  position: relative;
+  line-height: 70rpx;
+  padding: 0 30rpx;
+}
+
+.shops .shop-list {
+  margin-bottom: 20rpx;
+}
+

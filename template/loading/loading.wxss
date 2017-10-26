@@ -1,0 +1,17 @@
+.ani {
+  width: 100rpx;
+  height: 100rpx;
+  background: url("https://fuss10.elemecdn.com/c/7f/f26d800336750924f6a4b37f52d74png.png");
+  background-size: cover;
+  animation: ani 1s steps(28) infinite;
+}
+
+@keyframes ani {
+  0% {
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: -2800% 0px;
+  }
+}

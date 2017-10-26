@@ -1,0 +1,3 @@
+<template name="loading">
+  <view class="ani"></view>
+</template>

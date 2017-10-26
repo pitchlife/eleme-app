@@ -1,0 +1,64 @@
+<!--index.wxml-->
+<import src="/template/shop-item/shop-item.wxml" />
+<import src="/template/isLoading/isLoading.wxml" />
+
+<scroll-view scroll-y style="height:{{wHeight}}px;" bindscrolltolower="loadmore" class="place" wx:if="{{shops.length>0}}" enable-back-to-top="true" scroll-with-animation="true" scroll-top="{{scrolltop}}" bindscroll="onScroll" lower-threshold="0">
+  <view class="place-header">
+    <view class="address">
+      <view class="address-detail" bindtap="bindViewTap">
+        {{currentAddress.name}}
+      </view>
+      <view class="weather" wx:if="{{weather}}">
+        <view class="desc">
+          <view class="temperature">{{weather.temperature}}°</view>
+          <text>{{weather.description}}</text>
+        </view>
+        <image src="{{weather.image_hash}}"></image>
+      </view>
+    </view>
+    <view class="search-wrapper">
+      <navigator class="search" url="/pages/search/search?title=search">
+        <icon type="search" size="14" style='margin-right:4px' />搜索商家、商品</navigator>
+    </view>
+    <scroll-view scroll-x class="scroll-view_H">
+      <navigator url='/pages/search/search?keyword={{item.word}}' class="word" wx:for="{{HotWords}}" wx:key="{{index}}">{{item.word}}</navigator>
+    </scroll-view>
+  </view>
+  <view class="entries">
+    <swiper indicator-dots="true" indicator-color="#eee" indicator-active-color="#0085ff" class="swiper">
+      <swiper-item>
+        <view class="item" wx:for="{{entries}}" wx:key="{{index}}" wx:if="{{index<=7}}">
+          <image src="{{item.image_hash}}" class="icon"></image>
+          <view class="name">{{item.name}}</view>
+        </view>
+      </swiper-item>
+      <swiper-item>
+        <view class="item" wx:for="{{entries}}" wx:key="{{index}}" wx:if="{{index>7}}">
+          <image src="{{item.image_hash}}" class="icon"></image>
+          <view class="name">{{item.name}}</view>
+        </view>
+      </swiper-item>
+    </swiper>
+  </view>
+  <view class="shops">
+    <view class="title ui-border-b">推荐商家</view>
+    <view class="shop-list">
+      <block wx:for="{{shops}}" wx:key="{{index}}">
+        <navigator class='nav' hover-class="my-navigator-hover" url='/pages/shop/shop?id={{item.id}}'>
+          <template is="shopItem" data="{{item}}" />
+        </navigator>
+      </block>
+    </view>
+    <template is="isLoading" />
+  </view>
+  <image src='/static/images/top.png' class='toTop' bindtap='moveToTop' wx:if="{{flag}}"></image>
+</scroll-view>
+<view wx:else>
+  <view class='block-placeholder'></view>
+  <view class='img-wrapper'>
+    <image src='/static/images/place-loading1.svg' class='img-placeholder' mode='widthFix'></image>
+    <image src='/static/images/place-loading3.svg' class='img-placeholder' mode='widthFix'></image>
+    <image src='/static/images/place-loading3.svg' class='img-placeholder' mode='widthFix'></image>
+    <image src='/static/images/place-loading3.svg' class='img-placeholder' mode='widthFix'></image>
+  </view>
+</view>

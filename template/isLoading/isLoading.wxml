@@ -1,0 +1,18 @@
+<template name="isLoading">
+  <view class="loadMore">
+    <view class="load-wrapper">
+      <view class="icon-wrap">
+        <view class="loadimg loadimg1"><image src="/static/images/caomei.svg"></image></view>
+        <view class="loadimg loadimg2"><image src="/static/images/cheng.svg" ></image></view>
+        <view class="loadimg loadimg3"><image src="/static/images/boluo.svg"></image></view>
+        <view class="loadimg loadimg4"><image src="/static/images/pingguo.svg"></image></view>
+      </view>
+      <view class="loadbox">
+        <view class="line line-l"></view>
+        <view class="line line-r"></view>
+        <image src="/static/images/loadbox.png"></image>
+      </view>
+      <view class="loadshadow"></view>
+    </view>
+  </view>
+</template>

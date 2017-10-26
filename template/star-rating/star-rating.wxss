@@ -1,0 +1,32 @@
+.starrating {
+    position: relative;
+    display: inline-block;
+    line-height: 1em;
+    color: #ccc!important;
+    font-size:24rpx;
+}
+.starrating::before{
+  content: '★★★★★';
+  font-size: inherit;
+}
+.starrating.heard::before{
+  content: '☻☻☻☻☻';
+  font-size: 28rpx;
+}
+
+.starrating .star-on {
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    color: #ffc30c;
+    white-space: nowrap;
+}
+.starrating .star-on::before {
+    content: '★★★★★';
+    font-size: inherit;
+}
+.starrating.heard .star-on::before {
+    content: '☻☻☻☻☻';
+    font-size: inherit;
+}

@@ -1,0 +1,35 @@
+
+.cartcontrol {
+  display: inline-block;
+}
+.cartcontrol .inner {
+  border: 1px solid #eee;
+  border-radius: 13px;
+  text-align: center;
+  overflow: hidden;
+}
+.cartcontrol .inner .decrease,
+.cartcontrol .inner .increase {
+  width: 25px;
+  line-height: 26px;
+  float: left;
+  background: #f3f5f7;
+}
+.cartcontrol .inner .decrease.selectAttr,
+.cartcontrol .inner .increase.selectAttr {
+  width: auto;
+  padding: 0 10px;
+}
+.cartcontrol .inner .number {
+  float: left;
+  border-left: 1px solid #eee;
+  border-right: 1px solid #eee;
+  line-height: 26px;
+  padding: 0 20rpx;
+}
+.cartcontrol .inner .number .input-num {
+  width: 50px;
+  line-height: 26px;
+  height: 26px;
+  text-align: center;
+}

@@ -1,0 +1,94 @@
+.spec {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 101;
+  background: rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+}
+
+.spec .box {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  width: 80%;
+  padding: 10px;
+  border: 1px;
+  box-shadow: 0 1px 15px #ccc;
+  font-size: 14px;
+  z-index: 102;
+  animation: scaleAni 0.2s;
+}
+
+.spec .box .list {
+  border: 1px solid #eee;
+  padding: 10px;
+  background: #f3f5f9;
+}
+
+.spec .box .list .tit {
+  margin-bottom: 10px;
+}
+
+.spec .box .list .item.sold-out {
+  color: #b4b4b4 !important;
+}
+
+.spec .box .list .item .value {
+  display: inline-block;
+  padding: 2px 8px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 15px;
+}
+
+.spec .box .list .item .value strong {
+  color: #f00;
+}
+
+.spec .box .list .item .value.current {
+  border-color: #1e89e0;
+  color: #1e89e0;
+}
+
+.spec .box .price {
+  font-size: 16px;
+  font-weight: 700;
+  color: #ff6000;
+  margin: 5px auto 15px;
+}
+
+.spec .box .add {
+  display: inline-block;
+  width: 150px;
+  padding: 4px 0;
+  text-align: center;
+  background: #1e89e0;
+  color: #fff;
+  border-radius: 2px;
+}
+
+.spec .box .add:hover {
+  background: #006bc7;
+}
+
+.spec .box .close {
+  display: inline-block;
+  margin-left: 10px;
+  color: #999;
+}
+
+@keyframes scaleAni {
+  0% {
+    transform:translate(-50%, -50%) scale(0);
+  }
+
+  100% {
+    transform:translate(-50%, -50%) scale(1);
+  }
+}

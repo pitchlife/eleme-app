@@ -1,0 +1,8 @@
+<template name="starRating">
+  <view class='starrating {{item.rating_star?"heard":"star"}}'>
+    <text class='star-on' style='width:{{item.rating/5*100}}%;font-size:24rpx;' wx:if="{{item.rating}}"></text>
+    <text class='star-on' style='width:{{ratingScore.service_score/5*100}}%;font-size:24rpx;' wx:if="{{ratingScore.service_score}}"></text>
+    <text class='star-on' style='width:{{ratingScore.food_score/5*100}}%;font-size:24rpx;' wx:if="{{ratingScore.food_score}}"></text>
+    <text class='star-on' style='width:{{item.rating_star/5*100}}%;font-size:28rpx;' wx:if="{{item.rating_star}}"></text>
+  </view>
+</template>

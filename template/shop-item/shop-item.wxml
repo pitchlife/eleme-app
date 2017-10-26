@@ -1,0 +1,86 @@
+<import src="/template/label/label.wxml" />
+<import src="/template/star-rating/star-rating.wxml" />
+<template name="shopItem">
+  <view class='shop-item ui-border-b'>
+    <image src='{{item.image_path}}' class='avatar'></image>
+    <view class='content'>
+      <view class='name'>
+        <text class='shop-name'>{{item.name}}</text>
+      </view>
+      <view class='rating'>
+        <view class='left'>
+          <template is="starRating" data="{{item}}"/>
+          <text>{{item.rating}}分</text>
+          <text> 月售{{item.recent_order_num}}单</text>
+        </view>
+        <view class='right'>
+          <block wx:if="{{item.delivery_mode}}">
+            <template is="eLabel" data="{{item}}" />
+          </block>
+        </view>
+      </view>
+      <view class='delivery'>
+        <view class='left'>
+          <text>￥{{item.float_minimum_order_amount}}元起送</text> |
+          <text wx:if="{{item.float_delivery_fee==0}}">免费配送</text>
+          <text wx:else>配送费￥{{item.float_delivery_fee}}</text>
+        </view>
+        <view class='right'>
+          <text class='distance'>{{item.distance}}m</text> |
+          <text class='lead-time'>{{item.order_lead_time}}分钟</text>
+        </view>
+      </view>
+      <view class='activities' wx:if="{{item.activities.length>0}}">
+        <view class='description' wx:for="{{item.activities}}" wx:key="{{index}}" wx:if="{{index<2}}">
+          <text class="label" style='background:#{{item.icon_color}}'>{{item.icon_name}}</text>
+          {{item.description}}
+        </view>
+      </view>
+    </view>
+  </view>
+</template>
+
+<template name="searchItem">
+  <view class='shop-item ui-border-b'>
+    <image src='{{restaurant.image_path}}' class='avatar'></image>
+    <view class='content'>
+      <view class='name'>
+        <text class='shop-name'>{{restaurant.name}}</text>
+      </view>
+      <view class='rating'>
+        <view class='left'>
+          <text>{{restaurant.rating}}分</text>
+          <text> 月售{{restaurant.recent_order_num}}单</text>
+        </view>
+        <view class='right'>
+          <block wx:if="{{restaurant.delivery_mode}}">
+            <template is="eLabel" data="{{restaurant}}" />
+          </block>
+        </view>
+      </view>
+      <view class='delivery'>
+        <view class='left'>
+          <text>￥{{restaurant.float_minimum_order_amount}}元起送</text> |
+          <text>配送费￥{{restaurant.float_delivery_fee}}</text>
+        </view>
+        <view class='right'>
+          <text class='distance'>{{restaurant.distance/1000}}km</text> |
+          <text class='lead-time'>{{restaurant.order_lead_time}}分钟</text>
+        </view>
+      </view>
+      <view class='activities' wx:if="{{restaurant.activities.length>0}}">
+        <view class='description' wx:for="{{restaurant.activities}}" wx:for-item="activity" wx:key="{{index}}" wx:if="{{index<2}}">
+          <text class="label" style='background:#{{activity.icon_color}}'>{{activity.icon_name}}</text>
+          {{activity.description}}
+        </view>
+      </view>
+      <scroll-view class='foods' scroll-x>
+        <view class='food-item' wx:for="{{foods}}" wx:for-item="food" wx:key="{{index}}">
+          <image class='food-avatar' src='{{food.image_path}}'></image>
+          <view class='food-name'>{{food.name}}</view>
+          <view class='food-price'>￥{{food.price}}</view>
+        </view>
+      </scroll-view>
+    </view>
+  </view>
+</template>

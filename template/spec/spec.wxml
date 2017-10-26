@@ -1,0 +1,19 @@
+<template name="spec">
+  <view class="spec" bindtap="hide">
+    <view class="box">
+      <view class="body">
+        <view class="list">
+          <view class="tit">规格</view>
+          <view class='item' wx:for="{{selectedSpecFoods}}" wx:key="{{index}}" data-index="{{index}}" data-soldout="{{item.sold_out}}" catchtap="selectSpec">
+            <text class="value {{selectedSpecIndex==index?'current':''}}" wx:for="{{item.specs}}" wx:for-index="i" wx:for-item="spec" wx:key="{{i}}">{{spec.value}}</text>
+          </view>
+        </view>
+        <view class="price">￥{{specPrice}}</view>
+      </view>
+      <view class="footer">
+        <view class="add" data-index="{{selectedSpecIndex}}" catchtap="addSpec">选好了,加入购物车</view>
+        <view class="close" catchtap="hide">不要了</view>
+      </view>
+    </view>
+  </view>
+</template>

@@ -1,0 +1,162 @@
+<import src="/template/loading/loading.wxml" />
+<import src="/template/btn-cart/btn-cart.wxml" />
+<import src="/template/cart/cart.wxml" />
+<import src="/template/spec/spec.wxml" />
+<import src="/template/star-rating/star-rating.wxml" />
+<view class="shop">
+  <view class="shop-header">
+    <view class='shop-intro' wx:if="{{shop}}">
+      <image src='{{shop.image_path}}' class='shop-avatar'></image>
+      <view class='shop-info'>
+        <view class='name'>{{shop.name}}</view>
+        <view class='delivery'>
+          <text class='delivery-mode'>{{shop.delivery_mode.text}}</text>
+          <text class='delivery-time'> {{shop.order_lead_time}}分钟送达</text> |
+          <text class='delivery-fee'> 配送费￥{{shop.float_delivery_fee}}</text>
+        </view>
+        <view class='promotion' wx:if="{{shop.promotion_info}}">{{shop.promotion_info}}</view>
+        <view class='promotion' wx:else>用餐高峰时期请提前下单</view>
+      </view>
+    </view>
+    <view class='shop-activities'>
+      <view class='num'>{{shop.activities.length}}个活动</view>
+      <swiper vertical autoplay interval="2500" class="swiper">
+        <block wx:for="{{shop.activities}}" wx:key="{{index}}">
+          <swiper-item class="swiper-item">
+            <view class='act'>
+              <text class='icon'>{{item.icon_name}}</text>
+              <text>{{item.description}}</text>
+            </view>
+          </swiper-item>
+        </block>
+      </swiper>
+    </view>
+  </view>
+  <view class="shop-tab ui-border-b">
+    <view class='tab-item {{currentSwiper==0?"current":""}}'>
+      <text class='{{currentSwiper==0?"current":""}}'>商品</text>
+    </view>
+    <view class='tab-item'>
+      <text class='{{currentSwiper==1?"current":""}}'>评价</text>
+    </view>
+  </view>
+  <view class="shop-body">
+    <block wx:if="{{goods.length>0}}">
+      <swiper class="swiper" bindchange="swiperChange">
+        <swiper-item class="swiper-item">
+          <scroll-view class='menu' scroll-y scroll-into-view="menu{{currentMenuIndex}}" scroll-with-animation>
+            <view class='menu-item {{currentMenuIndex==index?"current":""}}' id="menu{{index}}" wx:for="{{goods}}" wx:key="{{index}}" bindtap="menuTap" data-index='{{index}}'>
+              <image src="{{item.icon_url}}" class='icon' wx:if="{{item.icon_url}}"></image>{{item.name}}
+            </view>
+          </scroll-view>
+          <scroll-view class='goods' scroll-y scroll-into-view="good{{currentMenuIndex}}" scroll-with-animation>
+            <view class='goods-item' id="good{{index}}" wx:for="{{goods}}" wx:key="{{index}}">
+              <view class='title' data-index='{{index}}' bindtap='getAllRects'>{{item.name}}</view>
+              <view class='food ui-border-b' wx:for="{{item.foods}}" wx:for-index="i" wx:for-item="food" wx:key="{{i}}">
+                <image lazy-load="{{food.image_path}}" src='{{food.image_path}}' class='icon'></image>
+                <view class='content'>
+                  <view class='name'>{{food.name}}</view>
+                  <view class='description' wx:if="{{food.description}}">{{food.description}}</view>
+                  <view class='rating'>
+                    <text>月售{{food.month_sales}}</text>
+                    <text> 好评率{{food.satisfy_rate}}</text>
+                  </view>
+                  <view class='price' wx:if="{{food.specfoods.length==1}}">
+                    <text class='symbol'>￥</text>
+                    <text class='cur-price'>{{food.specfoods[0].price}}</text>
+                    <text class='old-price' wx:if="{{food.specfoods[0].original_price}}">￥{{food.specfoods[0].original_price}}</text>
+                  </view>
+                  <view class='price' wx:else>
+                    <text class='symbol'>￥</text>
+                    <text class='cur-price'>{{food.specfoods[0].price}}</text>
+                    <text class='symbol'>起</text>
+                  </view>
+                  <view class="btn-control">
+                    <template is="btnCart" data="{{food,index,i}}" />
+                  </view>
+                </view>
+              </view>
+            </view>
+          </scroll-view>
+        </swiper-item>
+        <swiper-item class="swiper-item">
+          <scroll-view class="rating" scroll-y bindscrolltolower="loadMoreRatings" lower-threshold="10">
+            <view class="star_level">
+              <view class="star_level-item">
+                <view class="value star_level_value">{{ratingScore.star_level}}</view>
+                <view>综合评价</view>
+                <view>高于周围商家
+                  <text class="value">{{ratingScore.compare_rating*100}}%</text>
+                </view>
+              </view>
+              <view class="star_level-item">
+                <view class="service_score">
+                  服务态度：
+                  <template is="starRating" data="{{ratingScore}}" />
+                  <text class="value">{{ratingScore.service_score}}</text>
+                </view>
+                <view class="food_score">
+                  菜品评价：
+                  <template is="starRating" data="{{ratingScore}}" />
+                  <text class="value">{{ratingScore.food_score}}</text>
+                </view>
+              </view>
+            </view>
+            <view class="comment-box">
+              <view class="comment-body">
+                <view class="list">
+                  <view class="item ui-border-b" wx:for="{{ratings}}" wx:key="{{index}}">
+                    <image class="avatar" src="{{item.avatar}}"></image>
+                    <view class="content">
+                      <view class="username">
+                        <text>{{item.username}}</text>
+                        <text class="rated-at">{{item.rated_at}}</text>
+                      </view>
+                      <view class="rater-wrapper">
+                        <template is="starRating" data="{{item}}" />
+                        <text> {{item.rating_star}}分</text>
+                      </view>
+                      <view class="rating-text" wx:if="{{item.rating_text}}">{{item.rating_text}}</view>
+                      <view class="food-rating">
+                        <view wx:for="{{item.item_rating_list}}" wx:key="{{index}}" wx:for-item="rate" class='food-rating-list'>
+                          <view class="top">
+                            <text class="rate-name">{{rate.rate_name}} </text>
+                            <template is="starRating" data="{{item}}" />
+                            <!--<x-rater v-model="rate.rating_star" slot="value" star="❤" :active-color="raterColor" :font-size="16" disabled></x-rater>-->
+                            <text> {{rate.rating_star}}分</text>
+                            <text class="find-food"> 查看商品</text>
+                          </view>
+                          <view class="food-rating-text">{{rate.rating_text}}</view>
+                          <view class="reply-text" wx:if="{{rate.reply_text}}">
+                            商家回复：
+                            <p>{{rate.reply_text}}</p>
+                          </view>
+                          <view class="rating-img">
+                            <image src="rate.image_hash" wx:if="{{rate.image_hash}}"></image>
+                          </view>
+                        </view>
+                      </view>
+                    </view>
+                  </view>
+                </view>
+              </view>
+            </view>
+            <view wx:if="{{!hasMore}}" class='loading'>没有更多了!</view>
+            <view wx:else class='loading'>
+              <image src='/static/images/loading.gif'></image>加载中......
+            </view>
+          </scroll-view>
+        </swiper-item>
+      </swiper>
+    </block>
+    <view class='loading-wrapper' wx:else>
+      <template is="loading" />
+    </view>
+  </view>
+  <view class="shop-footer">
+    <template is="cart" data="{{selectedFoods,totalCount,totalPrice,payDesc,...shop}}" />
+  </view>
+  <block wx:if="{{flag}}">
+    <template is="spec" data="{{selectedSpecFoods,selectedSpecIndex,specPrice}}" />
+  </block>
+</view>

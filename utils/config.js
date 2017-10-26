@@ -1,0 +1,1 @@
+export const imageBasePath = 'https://fuss10.elemecdn.com/' //图片地址前缀

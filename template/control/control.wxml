@@ -1,0 +1,11 @@
+<template name="control">
+  <view class="cartcontrol">
+    <view class="inner">
+      <view class="decrease" data-index='{{index}}' data-specindex='{{specindex}}' data-goodindex='{{goodindex}}' data-foodindex='{{foodindex}}' catchtap="decrease" wx:if="{{count>0}}">-</view>
+      <view class="number" wx:if="{{count>0}}">
+        {{count}}
+      </view>
+      <view class="increase" data-index='{{index}}' data-specindex='{{specindex}}' data-goodindex='{{goodindex}}' data-foodindex='{{foodindex}}' catchtap='add'>+</view>
+    </view>
+  </view>
+</template>

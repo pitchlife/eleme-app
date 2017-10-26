@@ -1,0 +1,21 @@
+<template name="btnCart">
+  <view wx:if="{{food.is_sold_out}}">已售罄</view>
+  <view class="wrapper" wx:elif="{{food.specfoods.length<=1}}">
+    <view class="cart-decrease btnAni2" wx:if="{{food.specfoods[0].count>0}}" data-index="{{index}}" data-i="{{i}}" data-id="{{food.item_id}}" bindtap="decreaseCart">
+      <image src="/static/images/move.png"></image>
+    </view>
+    <view class="cart-count" wx:if="{{food.specfoods[0].count>0}}">{{food.specfoods[0].count}}</view>
+    <view class="cart-add" bindtap="addCart" data-index="{{index}}" data-i="{{i}}">
+      <image src="/static/images/add.png"></image>
+    </view>
+  </view>
+  <view class="wrapper" wx:else>
+    <view class="cart-decrease" wx:if="{{food.count>0}}" data-index="{{index}}" data-i="{{i}}" data-id="{{food.item_id}}" bindtap="decreaseCart">
+      <image src="/static/images/move.png"></image>
+    </view>
+    <view class="cart-count" wx:if="{{food.count>0}}">{{food.count}}</view>
+    <view class="cart-add specFlag" bindtap="showAttr" data-index="{{index}}" data-i="{{i}}" data-id="{{food.item_id}}">
+      选规格
+    </view>
+  </view>
+</template>
